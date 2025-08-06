@@ -969,6 +969,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   childAspectRatio: 2,
+
                   children: controller.dailyTargets.map((target) {
                     return _buildTargetCard(
                       label: target.name,
