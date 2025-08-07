@@ -1490,6 +1490,7 @@ class RecommendationCard extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
+
                 Container(
 
                   width: 38.w,
