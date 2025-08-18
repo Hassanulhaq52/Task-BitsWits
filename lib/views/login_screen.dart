@@ -11,28 +11,26 @@ class LoginScreen extends StatelessWidget {
   final RxBool obscureText = true.obs;
   final RxBool rememberMe = false.obs;
 
+  LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.only(
-                  top: 100, bottom: 40, left: 24, right: 24),
-              decoration: const BoxDecoration(
-                color: Colors.black,
-                // borderRadius: BorderRadius.vertical(
-                //   bottom: Radius.circular(32),
-                // ),
+              height: 217.h,
+              padding: EdgeInsets.only(
+                top: 100,
+                bottom: 40,
+                left: 24.w,
+                right: 24.w,
               ),
+              color: Colors.black,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
@@ -49,22 +47,18 @@ class LoginScreen extends StatelessWidget {
                   Text(
                     "Start Your Journey With Us.",
                     style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 14,
-                        color: Color(0xFFEA6230)),
+                      fontFamily: 'Montserrat',
+                      color: Color(0xFFEA6230),
+                    ),
                   ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 32),
-
-            // Form
+            SizedBox(height: 32.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
-                  // Email
                   TextField(
                     controller: emailCtrl,
                     keyboardType: TextInputType.emailAddress,
@@ -76,18 +70,18 @@ class LoginScreen extends StatelessWidget {
                         color: Color(0xFF73858F),
                       ),
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: const Color(0x1A73858F),
                       contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 18),
+                        horizontal: 16,
+                        vertical: 18,
+                      ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8.r),
                         borderSide: BorderSide.none,
                       ),
                     ),
                   ),
                   const SizedBox(height: 16),
-
-                  // Password
                   Obx(() => TextField(
                         controller: passwordCtrl,
                         obscureText: obscureText.value,
@@ -95,60 +89,81 @@ class LoginScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: const TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Color(0xFF73858F)),
+                            fontFamily: 'Montserrat',
+                            color: Color(0xFF73858F),
+                          ),
                           filled: true,
-                          fillColor: Colors.white,
+                          fillColor: const Color(0x1A73858F),
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 18),
+                            horizontal: 16,
+                            vertical: 18,
+                          ),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              color: Color(0xFF73858F99),
                               obscureText.value
                                   ? Icons.visibility_off
                                   : Icons.visibility,
+                              color: const Color(0x9973858F),
                             ),
                             onPressed: () =>
                                 obscureText.value = !obscureText.value,
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(8.r),
                             borderSide: BorderSide.none,
                           ),
                         ),
                       )),
                   const SizedBox(height: 16),
-
-                  // Remember me + Forgot password
                   Row(
                     children: [
-                      Obx(() => Checkbox(
-                            side: BorderSide(color: Color(0xFF73858F)),
-                            value: rememberMe.value,
-                            onChanged: (val) => rememberMe.value = val ?? false,
+                      Obx(() => SizedBox(
+                            width: 20.w,
+                            height: 20.h,
+                            child: Transform.scale(
+                              scale: 1,
+                              child: Checkbox(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                side: const BorderSide(
+                                  color: Color(0xFF73858F),
+                                  width: 1,
+                                ),
+                                value: rememberMe.value,
+                                onChanged: (val) =>
+                                    rememberMe.value = val ?? false,
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                visualDensity: const VisualDensity(
+                                    horizontal: -4, vertical: -4),
+                              ),
+                            ),
                           )),
-                      const Text("Remember me",
-                          style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF73858F))),
+                      const SizedBox(width: 8),
+                      const Text(
+                        "Remember me",
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF73858F),
+                        ),
+                      ),
                       const Spacer(),
                       TextButton(
                         onPressed: () {},
                         child: const Text(
                           "Forgot password?",
                           style: TextStyle(
-                              color: Color(0xFFF14336),
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w500),
+                            color: Color(0xFFF14336),
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
                   ),
-
-                  const SizedBox(height: 24),
-
-                  // Login Button
+                  SizedBox(height: 24.h),
                   Obx(() => controller.isLoading.value
                       ? const CircularProgressIndicator()
                       : SizedBox(
@@ -156,27 +171,25 @@ class LoginScreen extends StatelessWidget {
                           height: 48.h,
                           child: ElevatedButton(
                             onPressed: () => controller.login(
-                                emailCtrl.text, passwordCtrl.text),
+                              emailCtrl.text,
+                              passwordCtrl.text,
+                            ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF6BA814),
+                              backgroundColor: const Color(0xFF6BA814),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(89.r),
                               ),
                             ),
                             child: const Text(
                               "Login",
                               style: TextStyle(
-                                // fontSize: 16,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Montserrat',
                               ),
                             ),
                           ),
                         )),
-
                   SizedBox(height: 150.h),
-
-                  // Bottom Text
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [

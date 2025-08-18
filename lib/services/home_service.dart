@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeService {
-  final String baseUrl = 'https://dev2.pulse-force.com/user_management/gethome/';
+  final String baseUrl =
+      'https://dev2.pulse-force.com/user_management/gethome/';
 
   Future<Map<String, dynamic>?> fetchHomeData() async {
     try {

@@ -8,7 +8,7 @@ class AppRoutes {
   static const home = '/home';
 }
 
-class AppPages {
+class AppScreens {
   static final pages = [
     GetPage(name: AppRoutes.login, page: () => LoginScreen()),
     GetPage(name: AppRoutes.home, page: () => HomeScreen()),
